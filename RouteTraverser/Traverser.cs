@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace RouteTraverser
 {
-    public class Traverser
+    public class Traverser : ITraverseGraph
     {  
         public List<List<string>> Invoke(Dictionary<string, int> inputGraph)
         {
