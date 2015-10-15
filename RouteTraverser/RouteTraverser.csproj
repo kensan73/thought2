@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RouteTraverser</RootNamespace>
     <AssemblyName>RouteTraverser</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IShortCircuitLoops.cs" />
     <Compile Include="ITraverseGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traverser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LoopCheckStrategies\LoopCheckStrategies.csproj">
+      <Project>{87418041-2c98-4789-80ab-60cfa9448edf}</Project>
+      <Name>LoopCheckStrategies</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

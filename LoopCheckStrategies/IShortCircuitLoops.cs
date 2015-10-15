@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace RouteTraverser
+namespace LoopCheckStrategies
 {
     public interface IShortCircuitLoops
     {

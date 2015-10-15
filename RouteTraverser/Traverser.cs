@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using LoopCheckStrategies;
 
 namespace RouteTraverser
 {
@@ -17,12 +18,6 @@ namespace RouteTraverser
             if(!inputGraph.Any())
                 return new List<List<string>>();
 
-//            if (inputGraph.Count == 1)
-//                return new List<List<string>>
-//                {
-//                    {new List<string> {inputGraph.Keys.First()}}
-//                };
-
             return Traverse(inputGraph);
         }
 
@@ -34,7 +29,7 @@ namespace RouteTraverser
             {
                 var traversal = new List<string>();
                 TraverseAux(startLeg, inputGraph, ref traversal);
-                if(traversal != null)
+                if(traversal.Any())
                     traversals.Add(traversal);
             }
 
@@ -43,12 +38,13 @@ namespace RouteTraverser
 
         private void TraverseAux(string startLeg, Dictionary<string, int> inputGraph, ref List<string> traversal)
         {
+            if (_shortCircuiter.ShouldExitLoop(startLeg, inputGraph, traversal.Count))
+                return;
+
             // once you enter this function you have traversed from startLeg[0]
             // ..to startLeg[1] so update bookkeeping here
             traversal.Add(startLeg);
 
-            if (_shortCircuiter.ShouldExitLoop(startLeg, inputGraph, traversal.Count))
-                return;
 //            if (traversal.Count > inputGraph.Keys.Count*3)
 //            {
 //                return;

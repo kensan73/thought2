@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B207485B-B9A7-4F47-8C33-E75F76B21D43}</ProjectGuid>
+    <ProjectGuid>{87418041-2C98-4789-80AB-60CFA9448EDF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DistanceCalculator</RootNamespace>
-    <AssemblyName>DistanceCalculator</AssemblyName>
+    <RootNamespace>LoopCheckStrategies</RootNamespace>
+    <AssemblyName>LoopCheckStrategies</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,14 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Calculator.cs" />
+    <Compile Include="IShortCircuitLoops.cs" />
+    <Compile Include="LessThanOrEqualStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RouteTraverser\RouteTraverser.csproj">
-      <Project>{D9BB8417-AD6C-4B12-B1F4-D2226FC6BA9D}</Project>
-      <Name>RouteTraverser</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
