@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 
 namespace RouteTraverser.Tests
 {
-    public partial class RouteTraverserTests
+    public partial class TraverserTests
     {
         [TestFixture]
         public class WhenInvoking
@@ -80,7 +81,13 @@ namespace RouteTraverser.Tests
 
                 var result = _traverser.Invoke(oneNode);
 
-                Assert.That(result.Count, Is.EqualTo(0));
+                Assert.That(result.Count, Is.EqualTo(2));
+
+                Assert.That(result.First().First(), Is.EqualTo(sourceDest));
+                Assert.That(result.First().Last(), Is.EqualTo(sourceDest));
+
+                Assert.That(result.Last().First(), Is.EqualTo(sourceDest2));
+                Assert.That(result.Last().Last(), Is.EqualTo(sourceDest2));
             }
 
             [Test]
