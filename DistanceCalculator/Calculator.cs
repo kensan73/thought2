@@ -23,17 +23,28 @@ namespace DistanceCalculator
                 return graph[myPath];
             }
 
-            foreach (var traversal in traversals.Where(t => t.Count == myPath.Length))
+            foreach (var traversal in traversals.Where(t => t.Count == myPath.Length-1))
             {
-                if (traversal[0][0] == myPath[0] && traversal[traversal.Count - 1][1] == myPath[1])
-                    return traversal.Select(t => graph[t]).Sum();
-//                var myPathAndTraversal = myPath.Zip(traversal, (p, t) => new { Path = p, Traversal = t });
-//                var isDifferent = myPathAndTraversal.Any(nw => nw.Path != nw.Traversal[0]);
-//                if (isDifferent == false)
-//                    return graph[myPath];
+                if (StartLocationsAreEqual(myPath, traversal) && EndLocationsAreEqual(myPath, traversal))
+                    return CalculateDistanceOfTraversal(graph, traversal);
             }
 
             return -1;
+        }
+
+        private static int CalculateDistanceOfTraversal(Dictionary<string, int> graph, List<string> traversal)
+        {
+            return traversal.Select(t => graph[t]).Sum();
+        }
+
+        private static bool EndLocationsAreEqual(string myPath, List<string> traversal)
+        {
+            return traversal.Last().Last() == myPath.Last();
+        }
+
+        private static bool StartLocationsAreEqual(string myPath, List<string> traversal)
+        {
+            return traversal.First().First() == myPath.First();
         }
     }
 }
