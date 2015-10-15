@@ -22,6 +22,11 @@ namespace DistanceCalculator
                 return graph[myPath];
             }
 
+            foreach (var traversal in traversals.Where(t => t.Count == myPath.Length-1))
+            {
+                    
+            }
+
             return -1;
         }
     }

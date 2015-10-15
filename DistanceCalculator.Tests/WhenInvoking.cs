@@ -70,6 +70,44 @@ namespace DistanceCalculator.Tests
 
                 Assert.That(result, Is.EqualTo(distance));
             }
+
+            [Test]
+            public void HandlesTwoLegResultThatDoesntMatch()
+            {
+                const string leg = "AZ";
+                const int distance = 73;
+                const string leg2 = "ZD";
+                const int distance2 = 34;
+                var graph = new Dictionary<string, int> { {leg, distance}, {leg2, distance2} };
+                const string myPath = "AB";
+
+                var oneResult = new List<List<string>>{new List<string>{leg, leg2}};
+
+                _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
+
+                var result = _calcer.InvokeForPath(graph, myPath);
+
+                Assert.That(result, Is.EqualTo(-1));
+            }
+
+            [Test]
+            public void HandlesTwoLegResultThatDoesMatch()
+            {
+                const string leg = "AZ";
+                const int distance = 73;
+                const string leg2 = "ZD";
+                const int distance2 = 34;
+                var graph = new Dictionary<string, int> { {leg, distance}, {leg2, distance2} };
+                const string myPath = "AD";
+
+                var oneResult = new List<List<string>>{new List<string>{leg, leg2}};
+
+                _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
+
+                var result = _calcer.InvokeForPath(graph, myPath);
+
+                Assert.That(result, Is.EqualTo(distance + distance2));
+            }
         }
     }
 }
