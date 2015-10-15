@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RouteTraverser;
 
@@ -23,13 +22,18 @@ namespace DistanceCalculator
                 return graph[myPath];
             }
 
-            foreach (var traversal in traversals.Where(t => t.Count == myPath.Length-1))
+            foreach (var traversal in traversals.Where(t => TraversalLengthEqualsTripLength(myPath, t)))
             {
                 if (StartLocationsAreEqual(myPath, traversal) && EndLocationsAreEqual(myPath, traversal))
                     return CalculateDistanceOfTraversal(graph, traversal);
             }
 
             return -1;
+        }
+
+        private static bool TraversalLengthEqualsTripLength(string myPath, List<string> t)
+        {
+            return t.Count == myPath.Length-1;
         }
 
         private static int CalculateDistanceOfTraversal(Dictionary<string, int> graph, List<string> traversal)
