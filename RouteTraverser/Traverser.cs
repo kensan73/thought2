@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace RouteTraverser
 {
     public class Traverser
-    {
+    {  
         public List<List<string>> Invoke(Dictionary<string, int> inputGraph)
         {
             if(!inputGraph.Any())
@@ -27,7 +29,8 @@ namespace RouteTraverser
             {
                 var traversal = new List<string>();
                 TraverseAux(startLeg, inputGraph, ref traversal);
-                traversals.Add(traversal);
+                if(traversal != null)
+                    traversals.Add(traversal);
             }
 
             return traversals;
@@ -38,6 +41,12 @@ namespace RouteTraverser
             // once you enter this function you have traversed from startLeg[0]
             // ..to startLeg[1] so update bookkeeping here
             traversal.Add(startLeg);
+
+            if (traversal.Count > inputGraph.Keys.Count*3)
+            {
+                traversal = null;
+                return;
+            }
 
             var currentLoc = startLeg[1];
             var possibleDests = inputGraph.Keys.Where(k => k[0] == currentLoc).ToList();

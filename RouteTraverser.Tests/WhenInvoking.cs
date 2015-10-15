@@ -66,8 +66,22 @@ namespace RouteTraverser.Tests
                 Assert.That(result[0][1], Is.EqualTo(sourceDest2));
             }
 
-            //test avoids circular traversal
-            //honors early exit request?
+            [Test]
+            public void AvoidsInfiniteTraversal()
+            {
+                const string sourceDest = "AC";
+                const string sourceDest2 = "CA";
+
+                var oneNode = new Dictionary<string, int>
+                {
+                    {sourceDest, 5},
+                    {sourceDest2, 11}
+                };
+
+                var result = _traverser.Invoke(oneNode);
+
+                Assert.That(result.Count, Is.EqualTo(0));
+            }
         }
     }
 }
