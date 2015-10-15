@@ -82,6 +82,43 @@ namespace RouteTraverser.Tests
 
                 Assert.That(result.Count, Is.EqualTo(0));
             }
+
+            [Test]
+            public void MultiplePathsAreTraversed()
+            {
+                const string sourceDest = "AC";
+                const string sourceDest2 = "CD";
+                const string sourceDest3 = "BE";
+                const string sourceDest4 = "EF";
+                const string sourceDest5 = "FG";
+
+                var oneNode = new Dictionary<string, int>
+                {
+                    {sourceDest, 5},
+                    {sourceDest2, 11},
+                    {sourceDest3, 7},
+                    {sourceDest4, 13},
+                    {sourceDest5, 123},
+                };
+
+                var result = _traverser.Invoke(oneNode);
+
+                Assert.That(result.Count, Is.EqualTo(5));
+
+                Assert.That(result[0][0], Is.EqualTo(sourceDest));
+                Assert.That(result[0][1], Is.EqualTo(sourceDest2));
+
+                Assert.That(result[1][0], Is.EqualTo(sourceDest2));
+
+                Assert.That(result[2][0], Is.EqualTo(sourceDest3));
+                Assert.That(result[2][1], Is.EqualTo(sourceDest4));
+                Assert.That(result[2][2], Is.EqualTo(sourceDest5));
+                
+                Assert.That(result[3][0], Is.EqualTo(sourceDest4));
+                Assert.That(result[3][1], Is.EqualTo(sourceDest5));
+
+                Assert.That(result[4][0], Is.EqualTo(sourceDest5));
+            }
         }
     }
 }
