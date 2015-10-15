@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RouteTraverser</RootNamespace>
     <AssemblyName>RouteTraverser</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +43,12 @@
     <Compile Include="ITraverseGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Traverser.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RouteTraverserAuxStrategies\RouteTraverserAuxStrategies.csproj">
+      <Project>{90ca62e7-447d-4152-af9a-34d0cfc904b3}</Project>
+      <Name>RouteTraverserAuxStrategies</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

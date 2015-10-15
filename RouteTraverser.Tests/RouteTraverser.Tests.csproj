@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RouteTraverser.Tests</RootNamespace>
     <AssemblyName>RouteTraverser.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,6 +55,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RouteTraverserAuxStrategies\RouteTraverserAuxStrategies.csproj">
+      <Project>{90ca62e7-447d-4152-af9a-34d0cfc904b3}</Project>
+      <Name>RouteTraverserAuxStrategies</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RouteTraverser\RouteTraverser.csproj">
       <Project>{d9bb8417-ad6c-4b12-b1f4-d2226fc6ba9d}</Project>
       <Name>RouteTraverser</Name>
