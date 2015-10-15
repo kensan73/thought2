@@ -17,6 +17,7 @@ namespace DistanceCalculator.Tests
             public void Setup()
             {
                 _traverser = MockRepository.GenerateStrictMock<ITraverseGraph>();
+
                 _calcer = new Calculator(_traverser);
             }
 

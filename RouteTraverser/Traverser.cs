@@ -18,12 +18,6 @@ namespace RouteTraverser
             if(!inputGraph.Any())
                 return new List<List<string>>();
 
-//            if (inputGraph.Count == 1)
-//                return new List<List<string>>
-//                {
-//                    {new List<string> {inputGraph.Keys.First()}}
-//                };
-
             return Traverse(inputGraph);
         }
 
@@ -34,7 +28,6 @@ namespace RouteTraverser
             foreach (var startLeg in inputGraph.Keys)
             {
                 var traversal = new List<string>();
-//                TraverseAux(startLeg, inputGraph, ref traversal);
                 _auxTraverser.Invoke(startLeg, inputGraph, ref traversal);
                 if(traversal.Any())
                     traversals.Add(traversal);
@@ -42,25 +35,5 @@ namespace RouteTraverser
 
             return traversals;
         }
-
-//        private void TraverseAux(string startLeg, Dictionary<string, int> inputGraph, ref List<string> traversal)
-//        {
-//            // once you enter this function you have traversed from startLeg[0]
-//            // ..to startLeg[1] so update bookkeeping here
-//            traversal.Add(startLeg);
-//
-//            if (traversal.Count > inputGraph.Keys.Count*3)
-//            {
-//                return;
-//            }
-//
-//            var currentLoc = startLeg[1];
-//            var possibleDests = inputGraph.Keys.Where(k => k[0] == currentLoc).ToList();
-//
-//            foreach (var nextDest in possibleDests)
-//            {
-//                TraverseAux(nextDest, inputGraph, ref traversal);
-//            }
-//        }
     }
 }

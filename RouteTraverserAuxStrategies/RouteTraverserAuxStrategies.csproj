@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="CircularPathTraverser.cs" />
     <Compile Include="ITraverseAux.cs" />
+    <Compile Include="NLessThanTraverser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

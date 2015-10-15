@@ -10,12 +10,12 @@ namespace RouteTraverserAuxStrategies.Tests.CircularPathTraverserTests
         
         public class WhenInvoking
         {
-            private CircularPathTraverser _traverser;
+            private CircularPathTraverser _auxer;
 
             [SetUp]
             public void SetUp()
             {
-                _traverser = new CircularPathTraverser();
+                _auxer = new CircularPathTraverser();
             }
 
             [TearDown]
@@ -30,7 +30,7 @@ namespace RouteTraverserAuxStrategies.Tests.CircularPathTraverserTests
                 var traversal = new List<string>();
                 var startLeg = "AB";
 
-                _traverser.Invoke(startLeg, new Dictionary<string, int>{{startLeg, 3}}, ref traversal);
+                _auxer.Invoke(startLeg, new Dictionary<string, int>{{startLeg, 3}}, ref traversal);
 
                 Assert.That(traversal.Count, Is.EqualTo(1));
                 Assert.That(traversal.First(), Is.EqualTo(startLeg));
@@ -43,7 +43,7 @@ namespace RouteTraverserAuxStrategies.Tests.CircularPathTraverserTests
                 var startLeg = "AB";
                 var startLegNotA = "CD";
 
-                _traverser.Invoke(startLeg, new Dictionary<string, int>{{startLeg, 3}, {startLegNotA, 7}}, ref traversal);
+                _auxer.Invoke(startLeg, new Dictionary<string, int>{{startLeg, 3}, {startLegNotA, 7}}, ref traversal);
 
                 Assert.That(traversal.Count, Is.EqualTo(1));
                 Assert.That(traversal.First(), Is.EqualTo(startLeg));
@@ -56,7 +56,7 @@ namespace RouteTraverserAuxStrategies.Tests.CircularPathTraverserTests
                 var startLeg = "AB";
                 var nextLeg = "BC";
 
-                _traverser.Invoke(startLeg, new Dictionary<string, int> { {nextLeg, 7}, { startLeg, 3 } }, ref traversal);
+                _auxer.Invoke(startLeg, new Dictionary<string, int> { {nextLeg, 7}, { startLeg, 3 } }, ref traversal);
 
                 Assert.That(traversal.Count, Is.EqualTo(2));
                 Assert.That(traversal.First(), Is.EqualTo(startLeg));
@@ -71,7 +71,7 @@ namespace RouteTraverserAuxStrategies.Tests.CircularPathTraverserTests
                 var nextLeg = "BA";
                 var inputGraph = new Dictionary<string, int> { {nextLeg, 7}, { startLeg, 3 } };
 
-                _traverser.Invoke(startLeg, inputGraph, ref traversal);
+                _auxer.Invoke(startLeg, inputGraph, ref traversal);
 
                 Assert.That(traversal.Count, Is.EqualTo(inputGraph.Count*3+1));
                 Assert.That(traversal.First(), Is.EqualTo(startLeg));
