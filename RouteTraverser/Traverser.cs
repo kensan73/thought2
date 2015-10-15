@@ -3,18 +3,25 @@ using System.Linq;
 
 namespace RouteTraverser
 {
-    public class Traverser : ITraverseGraph
-    {  
+    public class Traverser
+    {
+        private readonly IShortCircuitLoops _shortCircuiter;
+
+        public Traverser(IShortCircuitLoops shortCircuiter)
+        {
+            _shortCircuiter = shortCircuiter;
+        }
+
         public List<List<string>> Invoke(Dictionary<string, int> inputGraph)
         {
             if(!inputGraph.Any())
                 return new List<List<string>>();
 
-            if (inputGraph.Count == 1)
-                return new List<List<string>>
-                {
-                    {new List<string> {inputGraph.Keys.First()}}
-                };
+//            if (inputGraph.Count == 1)
+//                return new List<List<string>>
+//                {
+//                    {new List<string> {inputGraph.Keys.First()}}
+//                };
 
             return Traverse(inputGraph);
         }
@@ -40,10 +47,12 @@ namespace RouteTraverser
             // ..to startLeg[1] so update bookkeeping here
             traversal.Add(startLeg);
 
-            if (traversal.Count > inputGraph.Keys.Count*3)
-            {
+            if (_shortCircuiter.ShouldExitLoop(startLeg, inputGraph, traversal.Count))
                 return;
-            }
+//            if (traversal.Count > inputGraph.Keys.Count*3)
+//            {
+//                return;
+//            }
 
             var currentLoc = startLeg[1];
             var possibleDests = inputGraph.Keys.Where(k => k[0] == currentLoc).ToList();
