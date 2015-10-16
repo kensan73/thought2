@@ -80,7 +80,7 @@ namespace RouteTraverser.Tests
 
                 var result = _traverser.Invoke(oneNode);
 
-                Assert.That(result.Count, Is.EqualTo(0));
+                Assert.That(result.Count, Is.EqualTo(2));
             }
 
             [Test]

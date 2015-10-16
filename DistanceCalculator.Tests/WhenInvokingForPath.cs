@@ -8,7 +8,7 @@ namespace DistanceCalculator.Tests
     public partial class DistanceCalculatorTests
     {
         [TestFixture]
-        public class WhenInvoking
+        public class WhenInvokingForPath
         {
             private ITraverseGraph _traverser;
             private Calculator _calcer;
@@ -167,6 +167,56 @@ namespace DistanceCalculator.Tests
                 const string myPath = "AZDM";
 
                 var oneResult = new List<List<string>>{new List<string>{leg, leg2, leg3}};
+
+                _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
+
+                var result = _calcer.InvokeForPath(graph, myPath);
+
+                Assert.That(result, Is.EqualTo(distance + distance2 + distance3));
+            }
+
+            [Test]
+            public void HandlesThreeLegResultMiddleDoesntMatch()
+            {
+                const string leg = "AZ";
+                const int distance = 73;
+                const string leg2 = "ZE";
+                const int distance2 = 34;
+                const string leg3 = "EM";
+                const int distance3 = 399;
+                var graph = new Dictionary<string, int> { { leg, distance }, { leg2, distance2 }, { leg3, distance3 } };
+                const string myPath = "AZDM";
+
+                var oneResult = new List<List<string>>{new List<string>{leg, leg2, leg3}};
+
+                _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
+
+                var result = _calcer.InvokeForPath(graph, myPath);
+
+                Assert.That(result, Is.EqualTo(-1));
+            }
+
+            [Test]
+            public void HandlesLongerMatchingLegResultMiddle()
+            {
+                const string leg = "AZ";
+                const int distance = 73;
+                const string leg2 = "ZD";
+                const int distance2 = 34;
+                const string leg3 = "DM";
+                const int distance3 = 399;
+                const string leg4 = "ME";
+                const int distance4 = 393;
+                var graph = new Dictionary<string, int>
+                {
+                    {leg, distance},
+                    {leg2, distance2},
+                    {leg3, distance3},
+                    {leg4, distance4}
+                };
+                const string myPath = "AZDM";
+
+                var oneResult = new List<List<string>>{new List<string>{leg, leg2, leg3, leg4}};
 
                 _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
 

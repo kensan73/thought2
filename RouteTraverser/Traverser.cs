@@ -42,7 +42,7 @@ namespace RouteTraverser
 
             if (traversal.Count > inputGraph.Keys.Count*3)
             {
-                traversal = null;
+//                traversal = null;
                 return;
             }
 

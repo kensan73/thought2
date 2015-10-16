@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using RouteTraverser;
 
@@ -23,18 +22,61 @@ namespace DistanceCalculator
                 return graph[myPath];
             }
 
-            foreach (var traversal in traversals.Where(t => t.Count == myPath.Length-1))
+            foreach (var traversal in traversals.Where(t => t.Count >= myPath.Length-1))
             {
-                if (StartLocationsAreEqual(myPath, traversal) && EndLocationsAreEqual(myPath, traversal))
-                    return CalculateDistanceOfTraversal(graph, traversal);
+                if (TraversalMatchesPath(myPath, traversal))
+                    return CalculateDistanceOfTraversal(graph, traversal, myPath.Length);
             }
 
             return -1;
         }
-
-        private static int CalculateDistanceOfTraversal(Dictionary<string, int> graph, List<string> traversal)
+        public List<List<string>> InvokeForStartEndAndLessThanOrEqual(Dictionary<string, int> graph, string startEnd, int threshold)
         {
-            return traversal.Select(t => graph[t]).Sum();
+            var result = new List<List<string>>();
+
+            var traversals = _traverser.Invoke(graph);
+
+            const int minThreshold = 2;
+
+            if (!traversals.Any() || !traversals.Any(t => t.Count >= minThreshold)) return result;
+
+            for (var i = minThreshold; i != threshold; ++i)
+            {
+                var range = traversals.GetRange(0, i-1);
+                if (!range.Any(t => t.Count >= minThreshold)) continue;
+                var filteredTraversals = range.Where(t => t.Count >= minThreshold).Where(t => StartAndEndLocationsMatch(startEnd, t));
+                foreach (var traversal in filteredTraversals)
+                {
+                    result.Add(traversal);
+                }
+            }
+
+            return result;
+        }
+
+        private static bool StartAndEndLocationsMatch(string startEnd, List<string> t)
+        {
+            var tfirst = t.First()[0];
+            var startendFirst = startEnd.First();
+            var tsecondtolast = t[t.Count-2][1];
+            var startendLast = startEnd.Last();
+            return tfirst == startendFirst && tsecondtolast == startendLast;
+        }
+
+        private static bool TraversalMatchesPath(string myPath, List<string> traversal)
+        {
+            var i = 0;
+            for(; i != myPath.Length-1; ++i)
+                if (myPath[i] != traversal[i][0])
+                    return false;
+
+            return traversal[i-1][1] == myPath.Last();
+//            return StartLocationsAreEqual(startEnd, traversal) && EndLocationsAreEqual(startEnd, traversal);
+        }
+
+        private static int CalculateDistanceOfTraversal(Dictionary<string, int> graph, List<string> traversal, int length)
+        {
+            return traversal.GetRange(0, length-1).Select(t => graph[t]).Sum();
         }
 
         private static bool EndLocationsAreEqual(string myPath, List<string> traversal)
