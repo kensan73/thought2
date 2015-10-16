@@ -40,9 +40,9 @@ namespace DistanceCalculator
 
             if (!traversals.Any() || !traversals.Any(t => t.Count >= minThreshold)) return result;
 
-            for (var i = minThreshold; i != threshold; ++i)
+            for (var i = minThreshold; i <= threshold; ++i)
             {
-                var range = traversals.GetRange(0, i-1);
+                var range = traversals;// traversals.GetRange(0, i-1);
                 if (!range.Any(t => t.Count >= minThreshold)) continue;
                 var filteredTraversals = range.Where(t => t.Count >= minThreshold).Where(t => StartAndEndLocationsMatch(startEnd, t));
                 foreach (var traversal in filteredTraversals)

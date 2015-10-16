@@ -84,6 +84,21 @@ namespace DistanceCalculator.Tests
                 Assert.That(result.Count, Is.EqualTo(1));
             }
 
+            [Test]
+            public void HandlesThreeTraverserResultMatches()
+            {
+                var graph = new Dictionary<string, int>();
+                const string myPath = "AZ";
+
+                var oneResult = new List<List<string>> { new List<string> { "AM", "MX", "XZ" } };
+
+                _traverser.Expect(t => t.Invoke(graph)).Return(oneResult);
+
+                var result = _calcer.InvokeForStartEndAndLessThanOrEqual(graph, myPath, 3);
+
+                Assert.That(result.Count, Is.EqualTo(1));
+            }
+
 //            [Test]
 //            public void HandlesOneTraverserResultThatDoesMatch()
 //            {
