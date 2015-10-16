@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistanceCalculator.Tests", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopCheckStrategies", "LoopCheckStrategies\LoopCheckStrategies.csproj", "{87418041-2C98-4789-80AB-60CFA9448EDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoopCheckStrategies.Tests", "LoopCheckStrategies.Tests\LoopCheckStrategies.Tests.csproj", "{2E376F0C-2C58-4871-BC98-F089F30F96B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{87418041-2C98-4789-80AB-60CFA9448EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87418041-2C98-4789-80AB-60CFA9448EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87418041-2C98-4789-80AB-60CFA9448EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E376F0C-2C58-4871-BC98-F089F30F96B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E376F0C-2C58-4871-BC98-F089F30F96B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E376F0C-2C58-4871-BC98-F089F30F96B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E376F0C-2C58-4871-BC98-F089F30F96B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +60,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BB388E28-C01D-4BF4-8529-17C3FC989323} = {50235057-3CFA-45C5-BF21-A3942ADFB9B1}
 		{6A9B62C1-47C3-4F5E-9E91-1BFDD48BB829} = {50235057-3CFA-45C5-BF21-A3942ADFB9B1}
+		{2E376F0C-2C58-4871-BC98-F089F30F96B3} = {50235057-3CFA-45C5-BF21-A3942ADFB9B1}
 	EndGlobalSection
 EndGlobal

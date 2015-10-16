@@ -1,12 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LoopCheckStrategies
 {
-    class LessThanOrEqualStrategy
+    public class LessThanOrEqualStrategy : IShortCircuitLoops
     {
+        private readonly int _threshold;
+
+        public LessThanOrEqualStrategy(int threshold)
+        {
+            _threshold = threshold;
+        }
+
+        public bool ShouldExitLoop(string startLeg, Dictionary<string, int> inputGraph, int depth)
+        {
+            return depth > _threshold;
+        }
     }
 }
